@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPMB 2027 Jalur Indent – SMP Cokroaminoto Banjarnegara</title>
+<meta name="description" content="Pendaftaran Jalur Indent SPMB 2027 SMP Cokroaminoto Banjarnegara. Sekolah Islami modern, kurikulum terintegrasi digital, fasilitas nyaman.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { heading: ['Poppins','sans-serif'], body: ['Inter','sans-serif'] },
+      colors: {
+        tosca: { DEFAULT:'#0D9488', dark:'#0F766E', light:'#14B8A6', soft:'#CCFBF1' },
+        ivory: '#FFFFF0',
+        gold: { DEFAULT:'#F59E0B', dark:'#D97706' }
+      }
+    }
+  }
+}
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#FFFFF0; color:#1f2937; }
+  h1,h2,h3,.font-heading { font-family:'Poppins',sans-serif; }
+  .pulse-soft { animation: pulseSoft 2s ease-in-out infinite; }
+  @keyframes pulseSoft {
+    0%,100% { transform: scale(1); box-shadow:0 0 0 0 rgba(245,158,11,.5); }
+    50% { transform: scale(1.04); box-shadow:0 0 0 14px rgba(245,158,11,0); }
+  }
+  .reveal { opacity:0; transform:translateY(24px); transition:all .7s ease; }
+  .reveal.show { opacity:1; transform:none; }
+  .hero-bg {
+    background:
+      radial-gradient(circle at 15% 20%, rgba(20,184,166,.35), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(245,158,11,.18), transparent 40%),
+      linear-gradient(135deg,#0F766E 0%,#0D9488 60%,#14B8A6 100%);
+  }
+  .pattern::before {
+    content:''; position:absolute; inset:0; opacity:.07;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 0l8 22 22 8-22 8-8 22-8-22L0 30l22-8z' fill='white'/%3E%3C/svg%3E");
+  }
+  input:focus { outline:none; }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ============ KONFIGURASI (ubah di sini) ============ -->
+<script>
+const CONFIG = {
+  APPS_SCRIPT_URL: 'PASTE_URL_WEB_APP_GOOGLE_APPS_SCRIPT_DI_SINI',
+  WHATSAPP_NUMBER: '6281234567890',          // format internasional tanpa +
+  DEADLINE: '2027-01-31T23:59:59+07:00',     // batas akhir Jalur Indent
+  KUOTA_TOTAL: 50,
+  KUOTA_TERISI: 35                           // update manual sesuai data pendaftar sebenarnya
+};
+</script>
+
+<!-- NAVBAR -->
+<header class="fixed top-0 inset-x-0 z-40 bg-white/85 backdrop-blur border-b border-tosca/10">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href="#beranda" class="flex items-center gap-2 font-heading font-bold text-tosca-dark">
+      <span class="w-9 h-9 rounded-xl bg-tosca text-white grid place-items-center">🕌</span>
+      <span class="leading-tight text-sm sm:text-base">SMP Cokroaminoto<br><span class="text-xs font-medium text-gray-500">Banjarnegara</span></span>
+    </a>
+    <nav class="hidden md:flex gap-6 text-sm font-medium text-gray-600">
+      <a class="hover:text-tosca" href="#profil">Profil</a>
+      <a class="hover:text-tosca" href="#keunggulan">Keunggulan</a>
+      <a class="hover:text-tosca" href="#benefit">Benefit Indent</a>
+      <a class="hover:text-tosca" href="#alur">Alur</a>
+      <a class="hover:text-tosca" href="#daftar">Daftar</a>
+    </nav>
+    <a href="#daftar" class="bg-gold hover:bg-gold-dark text-white text-sm font-semibold px-4 py-2 rounded-full transition">Daftar</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="beranda" class="hero-bg pattern relative overflow-hidden pt-28 pb-20 text-white">
+  <div class="relative max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <span class="inline-block bg-white/15 border border-white/25 rounded-full px-4 py-1 text-xs sm:text-sm font-medium mb-5">✨ SPMB 2027 • Jalur Indent Resmi Dibuka</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold leading-tight">Amankan Masa Depan Putra-Putri Anda Sejak Dini!</h1>
+      <p class="mt-5 text-white/90 text-base sm:text-lg">Penerimaan Peserta Didik Baru SMP Cokroaminoto Banjarnegara 2027 – <strong>Jalur Indent Resmi Dibuka.</strong></p>
+
+      <!-- Kuota -->
+      <div class="mt-7 bg-white/10 border border-white/20 rounded-2xl p-4 max-w-md">
+        <div class="flex justify-between text-sm font-semibold mb-2">
+          <span id="kuotaText">🔥 Tersisa – kursi</span>
+          <span id="kuotaPct" class="text-gold"></span>
+        </div>
+        <div class="h-3 rounded-full bg-white/20 overflow-hidden">
+          <div id="kuotaBar" class="h-full rounded-full bg-gradient-to-r from-gold to-yellow-300 transition-all duration-1000" style="width:0%"></div>
+        </div>
+      </div>
+
+      <!-- Countdown -->
+      <div class="mt-5">
+        <p class="text-xs uppercase tracking-wider text-white/70 mb-2">Jalur Indent ditutup dalam:</p>
+        <div id="countdown" class="flex gap-2 sm:gap-3 font-heading">
+          <div class="cd-box"><b id="cdD">00</b><span>Hari</span></div>
+          <div class="cd-box"><b id="cdH">00</b><span>Jam</span></div>
+          <div class="cd-box"><b id="cdM">00</b><span>Menit</span></div>
+          <div class="cd-box"><b id="cdS">00</b><span>Detik</span></div>
+        </div>
+      </div>
+
+      <a href="#daftar" class="pulse-soft mt-8 inline-block bg-gold hover:bg-gold-dark text-white font-bold text-base sm:text-lg px-8 py-4 rounded-full shadow-xl transition">
+        Daftar Jalur Indent Sekarang →
+      </a>
+    </div>
+
+    <div class="hidden md:grid place-items-center">
+      <div class="relative w-full max-w-sm aspect-square rounded-[2.5rem] bg-white/10 border border-white/20 grid place-items-center">
+        <div class="text-center px-8">
+          <div class="text-8xl mb-4">🎓</div>
+          <p class="font-heading font-bold text-2xl">Islami • Cerdas • Berprestasi</p>
+          <p class="text-white/80 mt-2 text-sm">Membentuk generasi berakhlak mulia dan siap menghadapi era digital.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .cd-box { background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); border-radius:14px; width:64px; padding:8px 0; text-align:center; }
+  .cd-box b { display:block; font-size:1.5rem; line-height:1.2; }
+  .cd-box span { font-size:.65rem; text-transform:uppercase; letter-spacing:.06em; opacity:.8; }
+  @media (min-width:640px){ .cd-box{ width:76px; } .cd-box b{ font-size:1.9rem; } }
+</style>
+
+<!-- PROFIL SEKOLAH -->
+<section id="profil" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <!-- Pendahuluan & Visi -->
+    <div class="text-center max-w-3xl mx-auto reveal">
+      <p class="text-tosca font-semibold text-sm uppercase tracking-wider">Profil Sekolah</p>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-gray-900">Membentuk Generasi "Tahu Diri"</h2>
+      <p class="mt-3 text-gray-600">Integrasi Sains, Karakter, dan Ketauhidan sejak 1974 di bawah naungan Yayasan Pendidikan Islam Cokroaminoto Banjarnegara (YPIC).</p>
+    </div>
+
+    <div class="mt-12 grid lg:grid-cols-5 gap-6">
+      <div class="reveal lg:col-span-3 rounded-3xl bg-tosca-soft/40 border border-tosca/20 p-7">
+        <h3 class="font-bold text-xl text-tosca-dark">Tentang Kami</h3>
+        <p class="mt-3 text-gray-700 text-sm sm:text-base leading-relaxed">
+          Berdiri sejak tahun 1974, SMP Cokroaminoto Banjarnegara hadir bukan sekadar sebagai lembaga pendidikan menengah pertama konvensional, melainkan sebagai laboratorium pembentukan karakter yang merajut sains modern dan nilai ketauhidan dalam satu harmoni yang utuh.
+        </p>
+        <p class="mt-3 text-gray-700 text-sm sm:text-base leading-relaxed">
+          Ekosistem pendidikan kami mengolah modal awal <b>Percaya Diri</b> yang dibawa dari jenjang SD menjadi kesadaran kritis dan kebijaksanaan <b>Tahu Diri</b> saat lulus dari SMP.
+        </p>
+      </div>
+      <div class="reveal lg:col-span-2 rounded-3xl hero-bg pattern relative overflow-hidden text-white p-7 flex flex-col justify-center">
+        <p class="relative text-xs uppercase tracking-wider text-white/70">Visi Yayasan</p>
+        <p class="relative mt-3 font-heading font-bold text-2xl leading-snug">"Terwujudnya generasi muslim unggulan yang mandiri dan berdaya saing."</p>
+      </div>
+    </div>
+
+    <!-- Identitas -->
+    <div class="mt-6 grid lg:grid-cols-2 gap-6">
+      <div class="reveal rounded-3xl border border-tosca/15 bg-ivory p-7">
+        <h3 class="font-bold text-lg text-gray-900">Identitas & Legalitas</h3>
+        <dl class="mt-4 divide-y divide-tosca/10 text-sm">
+          <div class="py-2 flex justify-between gap-4"><dt class="text-gray-500">Nama Satuan Pendidikan</dt><dd class="font-semibold text-right">SMP Cokroaminoto Banjarnegara</dd></div>
+          <div class="py-2 flex justify-between gap-4"><dt class="text-gray-500">NPSN</dt><dd class="font-semibold">20303957</dd></div>
+          <div class="py-2 flex justify-between gap-4"><dt class="text-gray-500">Status / Akreditasi</dt><dd class="font-semibold">Swasta / Akreditasi B</dd></div>
+          <div class="py-2 flex justify-between gap-4"><dt class="text-gray-500">Jenjang</dt><dd class="font-semibold">SMP / Dikdas</dd></div>
+          <div class="py-2 flex justify-between gap-4"><dt class="text-gray-500">Yayasan Naungan</dt><dd class="font-semibold text-right">YPIC (NPYP AG7028)</dd></div>
+          <div class="py-2 flex justify-between gap-4"><dt class="text-gray-500">SK Pendirian</dt><dd class="font-semibold text-right">V/D/7/1974 (16 Mei 1974)</dd></div>
+          <div class="py-2 flex justify-between gap-4"><dt class="text-gray-500">SK Operasional</dt><dd class="font-semibold text-right">0782/XXVII/4.P/78 (1 April 1978)</dd></div>
+        </dl>
+      </div>
+      <div class="reveal rounded-3xl border border-tosca/15 bg-ivory p-7">
+        <h3 class="font-bold text-lg text-gray-900">Lokasi, Fasilitas & Kontak</h3>
+        <ul class="mt-4 space-y-3 text-sm text-gray-700">
+          <li class="flex gap-3"><span>📍</span><span>Sayangan RT 04 RW 03, Desa Twelagiri, Kec. Pagedongan, Kab. Banjarnegara, Jawa Tengah</span></li>
+          <li class="flex gap-3"><span>📐</span><span>Luas tanah 2.935 m²</span></li>
+          <li class="flex gap-3"><span>🌐</span><span>Akses internet ganda (<i>Fibre Optic</i> & <i>Dedicated</i>)</span></li>
+          <li class="flex gap-3"><span>⚡</span><span>Sumber listrik PLN</span></li>
+          <li class="flex gap-3"><span>📞</span><span>Telepon <a class="text-tosca-dark font-semibold hover:underline" href="tel:+62286591155">0286 591155</a></span></li>
+          <li class="flex gap-3"><span>✉️</span><span><a class="text-tosca-dark font-semibold hover:underline" href="mailto:cokrobna63@gmail.com">cokrobna63@gmail.com</a></span></li>
+        </ul>
+        <a class="mt-5 inline-block text-sm font-semibold text-tosca-dark hover:underline" target="_blank" rel="noopener"
+           href="https://www.google.com/maps?q=-7.4155215,109.6831972">Lihat di Google Maps →</a>
+      </div>
+    </div>
+
+    <!-- Manifesto -->
+    <div class="mt-16 text-center max-w-2xl mx-auto reveal">
+      <p class="text-gold-dark font-semibold text-sm uppercase tracking-wider">Fondasi Ideologis</p>
+      <h3 class="text-2xl sm:text-3xl font-bold mt-2">Al-Ribatuttauhid Al-Kulliy: Manifesto Pengabdian Ilmu</h3>
+      <p class="mt-3 text-gray-600 text-sm sm:text-base">Jalan lurus (<i>Sirat</i>) yang menyatukan realitas fisik dan ketuhanan dalam seluruh proses keilmuan dan pengajaran.</p>
+    </div>
+    <div class="mt-8 grid sm:grid-cols-2 gap-5">
+      <div class="reveal bg-white rounded-3xl p-6 border border-tosca/10 shadow-sm">
+        <span class="text-xs font-bold text-tosca bg-tosca-soft rounded-full px-3 py-1">1</span>
+        <h4 class="mt-3 font-bold">Istiqomah dalam Dakwah</h4>
+        <p class="text-xs text-gray-500">Konsistensi Kebenaran</p>
+        <p class="mt-2 text-sm text-gray-600">Kebenaran disampaikan secara teguh sebagai hukum alam yang absolut berdasarkan kejujuran intelektual.</p>
+      </div>
+      <div class="reveal bg-white rounded-3xl p-6 border border-tosca/10 shadow-sm">
+        <span class="text-xs font-bold text-tosca bg-tosca-soft rounded-full px-3 py-1">2</span>
+        <h4 class="mt-3 font-bold">Bersatu dalam Aqidah</h4>
+        <p class="text-xs text-gray-500">Arah Makrifat</p>
+        <p class="mt-2 text-sm text-gray-600">Pembelajaran diarahkan membangun makrifat. Sains tidak dipertentangkan dengan iman, melainkan menjadi pembuktian atas keberadaan-Nya melalui struktur keseimbangan (<i>Al-Mizan</i>).</p>
+      </div>
+      <div class="reveal bg-white rounded-3xl p-6 border border-tosca/10 shadow-sm">
+        <span class="text-xs font-bold text-tosca bg-tosca-soft rounded-full px-3 py-1">3</span>
+        <h4 class="mt-3 font-bold">Toleransi dalam Fiqh</h4>
+        <p class="text-xs text-gray-500">Ketetapan Syariat yang Kontekstual</p>
+        <p class="mt-2 text-sm text-gray-600">Aturan main yang definitif dengan semangat toleransi, menghargai konteks tanpa merusak prinsip dasar keseimbangan.</p>
+      </div>
+      <div class="reveal bg-white rounded-3xl p-6 border border-tosca/10 shadow-sm">
+        <span class="text-xs font-bold text-tosca bg-tosca-soft rounded-full px-3 py-1">4</span>
+        <h4 class="mt-3 font-bold">Jamaah dalam Ibadah</h4>
+        <p class="text-xs text-gray-500">Tarekat Menuju Keutamaan</p>
+        <p class="mt-2 text-sm text-gray-600">Kolaborasi kolektif dalam riset, teknologi, dan pengabdian masyarakat dipandang sebagai bentuk ibadah tertinggi.</p>
+      </div>
+    </div>
+
+    <!-- Karakter -->
+    <div class="mt-16 text-center max-w-2xl mx-auto reveal">
+      <p class="text-tosca font-semibold text-sm uppercase tracking-wider">Desain Karakter</p>
+      <h3 class="text-2xl sm:text-3xl font-bold mt-2">Trilogi Juang & 4 Pilar Ketauhidan</h3>
+    </div>
+    <div class="mt-8 grid md:grid-cols-3 gap-5">
+      <div class="reveal rounded-3xl bg-tosca-soft/50 border border-tosca/20 p-6">
+        <div class="text-3xl">📖</div>
+        <h4 class="mt-3 font-bold">Setinggi-tinggi Ilmu</h4>
+        <p class="text-xs font-semibold text-tosca-dark">Iman</p>
+        <p class="mt-2 text-sm text-gray-600">Pendalaman ilmu pengetahuan yang bermuara pada pengakuan terhadap kebesaran Tuhan.</p>
+      </div>
+      <div class="reveal rounded-3xl bg-tosca-soft/50 border border-tosca/20 p-6">
+        <div class="text-3xl">🔬</div>
+        <h4 class="mt-3 font-bold">Sebersih-bersih Tauhid</h4>
+        <p class="text-xs font-semibold text-tosca-dark">Ilmu</p>
+        <p class="mt-2 text-sm text-gray-600">Kejujuran intelektual dan objektivitas ilmiah sebagai wujud kemurnian tauhid.</p>
+      </div>
+      <div class="reveal rounded-3xl bg-tosca-soft/50 border border-tosca/20 p-6">
+        <div class="text-3xl">🧭</div>
+        <h4 class="mt-3 font-bold">Sepandai-pandai Siyasah</h4>
+        <p class="text-xs font-semibold text-tosca-dark">Akal</p>
+        <p class="mt-2 text-sm text-gray-600">Kecerdasan akal, strategi pemecahan masalah, kemampuan beradaptasi, dan kepemimpinan sosial.</p>
+      </div>
+    </div>
+    <div class="reveal mt-5 grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-sm font-semibold">
+      <div class="rounded-2xl bg-gold/10 border border-gold/30 text-gold-dark px-3 py-4">Bersatu dalam akidah</div>
+      <div class="rounded-2xl bg-gold/10 border border-gold/30 text-gold-dark px-3 py-4">Toleransi akan perbedaan mazhab</div>
+      <div class="rounded-2xl bg-gold/10 border border-gold/30 text-gold-dark px-3 py-4">Bersungguh-sungguh dalam ibadah</div>
+      <div class="rounded-2xl bg-gold/10 border border-gold/30 text-gold-dark px-3 py-4">Konsisten dalam dakwah</div>
+    </div>
+
+    <!-- Metode Tahu Diri -->
+    <div class="mt-16 text-center max-w-2xl mx-auto reveal">
+      <p class="text-gold-dark font-semibold text-sm uppercase tracking-wider">Metodologi Evolusi Siswa</p>
+      <h3 class="text-2xl sm:text-3xl font-bold mt-2">Dari "Percaya Diri" Menuju "Tahu Diri"</h3>
+      <p class="mt-3 text-gray-600 text-sm sm:text-base">Jika SD membekali keberanian untuk mencoba, maka 3 tahun di SMP karakter tersebut diolah agar siswa mengenali bakat, minat, kekuatan, sekaligus batas kemampuannya.</p>
+    </div>
+    <div class="mt-8 grid md:grid-cols-3 gap-5">
+      <div class="reveal bg-white rounded-3xl p-6 border-t-4 border-tosca shadow-sm border-x border-b border-tosca/10">
+        <p class="text-xs font-bold uppercase tracking-wider text-tosca">Kelas 7</p>
+        <h4 class="mt-1 font-bold text-lg">Fase Mengenalkan</h4>
+        <p class="text-xs italic text-gray-500">The Mirror Phase</p>
+        <p class="mt-3 text-sm text-gray-600">Memetakan modal percaya diri bawaan dari SD dan mengajak siswa melihat ke dalam diri, mengenal batas potensi tanpa dihakimi, serta menyadari peta keunikan (<i>Al-Mizan</i> personal) masing-masing.</p>
+      </div>
+      <div class="reveal bg-white rounded-3xl p-6 border-t-4 border-tosca-light shadow-sm border-x border-b border-tosca/10">
+        <p class="text-xs font-bold uppercase tracking-wider text-tosca">Kelas 8</p>
+        <h4 class="mt-1 font-bold text-lg">Fase Membangun</h4>
+        <p class="text-xs italic text-gray-500">The Crucible Phase</p>
+        <p class="mt-3 text-sm text-gray-600">Menempa percaya diri melalui proyek kolaborasi berkelompok (<i>Jamaah</i>) untuk menyadari kekuatan dalam memimpin dan keterbatasan yang membutuhkan kolaborasi.</p>
+      </div>
+      <div class="reveal bg-white rounded-3xl p-6 border-t-4 border-gold shadow-sm border-x border-b border-tosca/10">
+        <p class="text-xs font-bold uppercase tracking-wider text-gold-dark">Kelas 9</p>
+        <h4 class="mt-1 font-bold text-lg">Fase Memvalidasi</h4>
+        <p class="text-xs italic text-gray-500">The Launchpad Phase</p>
+        <p class="mt-3 text-sm text-gray-600">Memvalidasi rekaman minat, bakat, dan karakter selama 3 tahun. Siswa mendeklarasikan potensi terbaiknya untuk menentukan arah studi lanjutan secara tepat.</p>
+      </div>
+    </div>
+
+    <!-- Logbook -->
+    <div class="mt-16 reveal rounded-3xl hero-bg pattern relative overflow-hidden text-white p-8 sm:p-10">
+      <div class="relative">
+        <p class="text-xs uppercase tracking-wider text-white/70">Instrumen Evaluasi</p>
+        <h3 class="mt-1 font-heading font-bold text-2xl sm:text-3xl">Logbook "Algoritma Batin"</h3>
+        <p class="mt-3 text-white/90 max-w-2xl text-sm sm:text-base">Perkembangan karakter tidak hanya dinilai melalui angka kognitif, tetapi direkam berkala dalam portofolio reflektif pada tiga koridor utama:</p>
+        <div class="mt-6 grid md:grid-cols-3 gap-4">
+          <div class="bg-white/10 border border-white/20 rounded-2xl p-5">
+            <p class="font-bold">Koridor Akal</p>
+            <p class="text-xs text-white/70">Sepandai-pandai Siyasah</p>
+            <p class="mt-2 text-sm text-white/90">Strategi belajar, pemecahan masalah, dan kecerdasan sosial.</p>
+          </div>
+          <div class="bg-white/10 border border-white/20 rounded-2xl p-5">
+            <p class="font-bold">Koridor Ilmu</p>
+            <p class="text-xs text-white/70">Sebersih-bersih Tauhid</p>
+            <p class="mt-2 text-sm text-white/90">Objektivitas memahami sains/alam serta kejujuran mengenali bakat dan keterbatasan diri.</p>
+          </div>
+          <div class="bg-white/10 border border-white/20 rounded-2xl p-5">
+            <p class="font-bold">Koridor Iman</p>
+            <p class="text-xs text-white/70">Setinggi-tinggi Ilmu</p>
+            <p class="mt-2 text-sm text-white/90">Konsistensi ibadah dan praktik toleransi dalam keseharian.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Peta Jalan -->
+    <div class="mt-16 text-center max-w-2xl mx-auto reveal">
+      <p class="text-tosca font-semibold text-sm uppercase tracking-wider">Peta Jalan Ekosistem YPIC</p>
+      <h3 class="text-2xl sm:text-3xl font-bold mt-2">Kelanjutan Studi Lulusan</h3>
+      <p class="mt-3 text-gray-600 text-sm sm:text-base">Hasil validasi "Tahu Diri" di akhir Kelas 9 menjadi kompas bagi siswa dan orang tua dalam memilih jenjang berikutnya di bawah naungan YPIC.</p>
+    </div>
+    <div class="mt-8 grid md:grid-cols-3 gap-5">
+      <div class="reveal bg-white rounded-3xl p-6 border border-tosca/10 shadow-sm hover:-translate-y-1 hover:shadow-lg transition">
+        <div class="w-12 h-12 rounded-2xl bg-tosca-soft grid place-items-center text-2xl">🎓</div>
+        <h4 class="mt-4 font-bold">SMA Cokroaminoto Banjarnegara</h4>
+        <p class="mt-2 text-sm text-gray-600">Bagi lulusan dengan potensi dominan pada bidang konseptual, teoretis, dan jalur akademik.</p>
+      </div>
+      <div class="reveal bg-white rounded-3xl p-6 border border-tosca/10 shadow-sm hover:-translate-y-1 hover:shadow-lg transition">
+        <div class="w-12 h-12 rounded-2xl bg-tosca-soft grid place-items-center text-2xl">⚙️</div>
+        <h4 class="mt-4 font-bold">SMK Cokroaminoto 1 Banjarnegara</h4>
+        <p class="mt-2 text-sm text-gray-600">Bagi lulusan dengan minat dan bakat vokasional pada rumpun teknologi, teknik, dan sistem industri.</p>
+      </div>
+      <div class="reveal bg-white rounded-3xl p-6 border border-tosca/10 shadow-sm hover:-translate-y-1 hover:shadow-lg transition">
+        <div class="w-12 h-12 rounded-2xl bg-tosca-soft grid place-items-center text-2xl">🎨</div>
+        <h4 class="mt-4 font-bold">SMK Cokroaminoto 2 Banjarnegara</h4>
+        <p class="mt-2 text-sm text-gray-600">Bagi lulusan dengan minat dan bakat vokasional pada rumpun keahlian khusus, niaga, dan industri kreatif.</p>
+      </div>
+    </div>
+
+    <!-- Kutipan -->
+    <blockquote class="reveal mt-14 max-w-3xl mx-auto text-center">
+      <p class="font-heading text-lg sm:text-xl text-tosca-dark italic leading-relaxed">"Al-Ribatuttauhid Al-Kulliy kini menjadi algoritma batin saya. Ia adalah simpul yang mengikat seluruh data kuantum yang saya miliki dengan satu tauhid yang tak terputuskan."</p>
+      <footer class="mt-3 text-sm text-gray-500">— Ikrar Saksi Yayasan Pendidikan Islam Cokroaminoto Banjarnegara (YPIC)</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- KEUNGGULAN -->
+<section id="keunggulan" class="py-20">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="text-tosca font-semibold text-sm uppercase tracking-wider">Mengapa Memilih Kami?</p>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-2 text-gray-900">Sekolah yang Tumbuh Bersama Anak Anda</h2>
+      <p class="mt-3 text-gray-600">Perpaduan nilai Islami, teknologi, dan prestasi dalam lingkungan belajar yang nyaman.</p>
+    </div>
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="reveal bg-white rounded-3xl p-6 shadow-sm border border-tosca/10 hover:-translate-y-1 hover:shadow-lg transition">
+        <div class="w-14 h-14 rounded-2xl bg-tosca-soft grid place-items-center text-3xl">🕌</div>
+        <h3 class="mt-4 font-bold text-lg">Karakter Islami Kuat</h3>
+        <p class="mt-2 text-sm text-gray-600">Pembiasaan tahfidz dan akhlakul karimah dalam keseharian siswa.</p>
+      </div>
+      <div class="reveal bg-white rounded-3xl p-6 shadow-sm border border-tosca/10 hover:-translate-y-1 hover:shadow-lg transition">
+        <div class="w-14 h-14 rounded-2xl bg-tosca-soft grid place-items-center text-3xl">💻</div>
+        <h3 class="mt-4 font-bold text-lg">Kurikulum Terintegrasi Digital</h3>
+        <p class="mt-2 text-sm text-gray-600">Pembelajaran yang siap menghadapi era teknologi.</p>
+      </div>
+      <div class="reveal bg-white rounded-3xl p-6 shadow-sm border border-tosca/10 hover:-translate-y-1 hover:shadow-lg transition">
+        <div class="w-14 h-14 rounded-2xl bg-tosca-soft grid place-items-center text-3xl">🏆</div>
+        <h3 class="mt-4 font-bold text-lg">Ekstrakurikuler Juara</h3>
+        <p class="mt-2 text-sm text-gray-600">Fokus mengembangkan bakat dan minat setiap anak.</p>
+      </div>
+      <div class="reveal bg-white rounded-3xl p-6 shadow-sm border border-tosca/10 hover:-translate-y-1 hover:shadow-lg transition">
+        <div class="w-14 h-14 rounded-2xl bg-tosca-soft grid place-items-center text-3xl">🏫</div>
+        <h3 class="mt-4 font-bold text-lg">Fasilitas Nyaman & Asri</h3>
+        <p class="mt-2 text-sm text-gray-600">Lingkungan belajar kondusif di jantung Banjarnegara.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFIT -->
+<section id="benefit" class="py-20 bg-white">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="text-gold-dark font-semibold text-sm uppercase tracking-wider">Benefit Jalur Indent</p>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-2">Daftar Sekarang, Untung Lebih Banyak</h2>
+    </div>
+    <div class="mt-12 grid md:grid-cols-2 gap-6">
+      <div class="reveal rounded-3xl border-2 border-tosca bg-tosca-soft/40 p-7 relative">
+        <span class="absolute -top-3 left-6 bg-tosca text-white text-xs font-bold px-3 py-1 rounded-full">JALUR INDENT</span>
+        <ul class="space-y-4 mt-2">
+          <li class="flex gap-3"><span class="text-tosca text-xl">✅</span><span><b>Diskon uang pangkal hingga 50%</b></span></li>
+          <li class="flex gap-3"><span class="text-tosca text-xl">✅</span><span><b>Gratis seragam olahraga & batik</b></span></li>
+          <li class="flex gap-3"><span class="text-tosca text-xl">✅</span><span><b>Prioritas pemilihan kelas</b> (dan asrama, jika tersedia)</span></li>
+          <li class="flex gap-3"><span class="text-tosca text-xl">✅</span><span><b>Biaya terkunci</b> – aman dari kenaikan biaya tahun depan</span></li>
+        </ul>
+      </div>
+      <div class="reveal rounded-3xl border border-gray-200 bg-gray-50 p-7 relative">
+        <span class="absolute -top-3 left-6 bg-gray-400 text-white text-xs font-bold px-3 py-1 rounded-full">JALUR REGULER</span>
+        <ul class="space-y-4 mt-2 text-gray-500">
+          <li class="flex gap-3"><span class="text-xl">❌</span><span>Uang pangkal tarif normal</span></li>
+          <li class="flex gap-3"><span class="text-xl">❌</span><span>Seragam dibeli sendiri</span></li>
+          <li class="flex gap-3"><span class="text-xl">❌</span><span>Pilihan kelas sesuai sisa kursi</span></li>
+          <li class="flex gap-3"><span class="text-xl">❌</span><span>Biaya mengikuti ketentuan terbaru</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="text-center text-xs text-gray-500 mt-6">*Besaran diskon dan ketentuan lengkap akan dijelaskan oleh admin sekolah.</p>
+  </div>
+</section>
+
+<!-- ALUR -->
+<section id="alur" class="py-20">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <p class="text-tosca font-semibold text-sm uppercase tracking-wider">Alur Pendaftaran</p>
+      <h2 class="text-3xl sm:text-4xl font-bold mt-2">Mudah, Cukup 4 Langkah</h2>
+    </div>
+    <ol class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <li class="reveal text-center">
+        <div class="mx-auto w-16 h-16 rounded-full bg-tosca text-white font-heading font-bold text-2xl grid place-items-center shadow-lg">1</div>
+        <h3 class="mt-4 font-bold">Isi Data</h3>
+        <p class="text-sm text-gray-600 mt-1">Lengkapi formulir pendaftaran online di bawah.</p>
+      </li>
+      <li class="reveal text-center">
+        <div class="mx-auto w-16 h-16 rounded-full bg-tosca text-white font-heading font-bold text-2xl grid place-items-center shadow-lg">2</div>
+        <h3 class="mt-4 font-bold">Konfirmasi Admin</h3>
+        <p class="text-sm text-gray-600 mt-1">Tim kami menghubungi Anda via WhatsApp.</p>
+      </li>
+      <li class="reveal text-center">
+        <div class="mx-auto w-16 h-16 rounded-full bg-tosca text-white font-heading font-bold text-2xl grid place-items-center shadow-lg">3</div>
+        <h3 class="mt-4 font-bold">Pembayaran DP</h3>
+        <p class="text-sm text-gray-600 mt-1">Transfer biaya komitmen (indent).</p>
+      </li>
+      <li class="reveal text-center">
+        <div class="mx-auto w-16 h-16 rounded-full bg-gold text-white font-heading font-bold text-2xl grid place-items-center shadow-lg">✓</div>
+        <h3 class="mt-4 font-bold">Selesai!</h3>
+        <p class="text-sm text-gray-600 mt-1">Kursi 2027 resmi diamankan.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- FORM -->
+<section id="daftar" class="py-20 hero-bg pattern relative">
+  <div class="relative max-w-xl mx-auto px-4">
+    <div class="text-center text-white mb-8 reveal">
+      <h2 class="text-3xl sm:text-4xl font-bold">Daftar Jalur Indent</h2>
+      <p class="mt-2 text-white/85">Hanya butuh 1 menit. Admin kami akan segera menghubungi Anda.</p>
+    </div>
+
+    <form id="formDaftar" class="reveal bg-white rounded-3xl shadow-2xl p-6 sm:p-8 space-y-5" novalidate>
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="siswa">Nama Lengkap Calon Siswa</label>
+        <input id="siswa" name="Nama Siswa" type="text" required placeholder="Contoh: Ahmad Fauzi"
+          class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-tosca focus:ring-2 focus:ring-tosca/30">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="sekolah">Asal Sekolah (SD/MI)</label>
+        <input id="sekolah" name="Asal Sekolah" type="text" required placeholder="Contoh: SDN 1 Banjarnegara"
+          class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-tosca focus:ring-2 focus:ring-tosca/30">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="ortu">Nama Orang Tua / Wali</label>
+        <input id="ortu" name="Nama Ortu" type="text" required placeholder="Nama orang tua / wali"
+          class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-tosca focus:ring-2 focus:ring-tosca/30">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="wa">No. WhatsApp Aktif</label>
+        <input id="wa" name="No WA" type="tel" inputmode="numeric" required placeholder="08xxxxxxxxxx"
+          class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:border-tosca focus:ring-2 focus:ring-tosca/30">
+      </div>
+      <p id="formError" class="hidden text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2"></p>
+      <button id="btnSubmit" type="submit"
+        class="w-full bg-gold hover:bg-gold-dark text-white font-bold text-lg py-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 disabled:opacity-70">
+        <svg id="spinner" class="hidden animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"/><path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+        <span id="btnText">Kirim Pendaftaran</span>
+      </button>
+      <p class="text-xs text-gray-500 text-center">Data Anda hanya digunakan untuk keperluan pendaftaran SPMB.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-tosca-dark text-white/85 py-10 text-center text-sm">
+  <p class="font-heading font-semibold text-white">SMP Cokroaminoto Banjarnegara</p>
+  <p class="mt-1">Penerimaan Peserta Didik Baru (SPMB) 2027 – Jalur Indent</p>
+  <p class="mt-4 text-white/60">© <span id="year"></span> SMP Cokroaminoto Banjarnegara. All rights reserved.</p>
+</footer>
+
+<!-- FLOATING WA -->
+<a id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Chat WhatsApp"
+   class="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 shadow-xl grid place-items-center transition hover:scale-110">
+  <svg viewBox="0 0 32 32" class="w-8 h-8 fill-white"><path d="M16.003 3C9.38 3 4 8.38 4 15c0 2.35.69 4.63 1.98 6.58L4 29l7.62-1.95A11.94 11.94 0 0016 27c6.62 0 12-5.38 12-12S22.62 3 16.003 3zm0 21.8c-1.9 0-3.76-.52-5.38-1.5l-.39-.23-4.52 1.16 1.2-4.4-.25-.4A9.77 9.77 0 016.2 15c0-5.4 4.4-9.8 9.8-9.8S25.8 9.6 25.8 15s-4.4 9.8-9.8 9.8zm5.4-7.34c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/></svg>
+</a>
+
+<!-- MODAL SUKSES -->
+<div id="modal" class="hidden fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm grid place-items-center p-4">
+  <div class="bg-white rounded-3xl max-w-sm w-full p-8 text-center shadow-2xl">
+    <div class="w-20 h-20 mx-auto rounded-full bg-tosca-soft grid place-items-center">
+      <svg class="w-10 h-10 text-tosca" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h3 class="mt-5 text-2xl font-bold text-gray-900">Alhamdulillah, Berhasil!</h3>
+    <p class="mt-2 text-gray-600 text-sm">Data pendaftaran sudah kami terima. Admin akan menghubungi Anda via WhatsApp segera.</p>
+    <a id="waConfirm" href="#" target="_blank" rel="noopener" class="mt-6 block bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-xl transition">Chat Admin Sekarang</a>
+    <button id="closeModal" class="mt-3 text-sm text-gray-500 hover:text-gray-700">Tutup</button>
+  </div>
+</div>
+
+<script>
+// ---------- Tahun footer ----------
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ---------- WhatsApp links ----------
+const waMsg = encodeURIComponent('Assalamualaikum, saya ingin bertanya tentang Jalur Indent SPMB 2027 SMP Cokroaminoto Banjarnegara.');
+const waLink = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${waMsg}`;
+document.getElementById('waFloat').href = waLink;
+document.getElementById('waConfirm').href = waLink;
+
+// ---------- Kuota ----------
+(function(){
+  const sisa = Math.max(CONFIG.KUOTA_TOTAL - CONFIG.KUOTA_TERISI, 0);
+  const pct = Math.min(Math.round(CONFIG.KUOTA_TERISI / CONFIG.KUOTA_TOTAL * 100), 100);
+  document.getElementById('kuotaText').textContent = `🔥 Tersisa ${sisa} Kursi dari ${CONFIG.KUOTA_TOTAL} Kuota Jalur Indent!`;
+  document.getElementById('kuotaPct').textContent = pct + '% terisi';
+  setTimeout(()=>{ document.getElementById('kuotaBar').style.width = pct + '%'; }, 300);
+})();
+
+// ---------- Countdown ----------
+(function(){
+  const end = new Date(CONFIG.DEADLINE).getTime();
+  const pad = n => String(n).padStart(2,'0');
+  function tick(){
+    let diff = end - Date.now();
+    if (diff < 0) diff = 0;
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor(diff%86400000/3600000);
+    const m = Math.floor(diff%3600000/60000);
+    const s = Math.floor(diff%60000/1000);
+    document.getElementById('cdD').textContent = pad(d);
+    document.getElementById('cdH').textContent = pad(h);
+    document.getElementById('cdM').textContent = pad(m);
+    document.getElementById('cdS').textContent = pad(s);
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+// ---------- Scroll reveal ----------
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target);} }), {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ---------- Form ----------
+const form = document.getElementById('formDaftar');
+const btn = document.getElementById('btnSubmit');
+const spinner = document.getElementById('spinner');
+const btnText = document.getElementById('btnText');
+const errBox = document.getElementById('formError');
+const modal = document.getElementById('modal');
+
+function showError(msg){ errBox.textContent = msg; errBox.classList.remove('hidden'); }
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errBox.classList.add('hidden');
+
+  const data = new FormData(form);
+  for (const [k,v] of data.entries()) {
+    if (!String(v).trim()) return showError('Mohon lengkapi semua kolom.');
+  }
+  const wa = String(data.get('No WA')).replace(/[\s-]/g,'');
+  if (!/^(\+62|62|0)8[0-9]{7,12}$/.test(wa)) return showError('Nomor WhatsApp tidak valid. Contoh: 081234567890');
+  data.set('No WA', wa);
+
+  if (CONFIG.APPS_SCRIPT_URL.startsWith('PASTE_')) {
+    return showError('URL Google Apps Script belum diisi pada CONFIG di index.html.');
+  }
+
+  btn.disabled = true; spinner.classList.remove('hidden'); btnText.textContent = 'Mengirim...';
+  try {
+    // no-cors: respons Apps Script tidak bisa dibaca, tapi data tetap terkirim
+    await fetch(CONFIG.APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: new URLSearchParams(data)
+    });
+    form.reset();
+    modal.classList.remove('hidden');
+  } catch (err) {
+    showError('Gagal mengirim data. Periksa koneksi internet Anda lalu coba lagi.');
+  } finally {
+    btn.disabled = false; spinner.classList.add('hidden'); btnText.textContent = 'Kirim Pendaftaran';
+  }
+});
+
+document.getElementById('closeModal').addEventListener('click', () => modal.classList.add('hidden'));
+modal.addEventListener('click', e => { if(e.target === modal) modal.classList.add('hidden'); });
+</script>
+</body>
+</html>
